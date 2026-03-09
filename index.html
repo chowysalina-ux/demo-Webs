@@ -1031,21 +1031,4 @@
   });
 })();
 </script>
-  const dots  = document.getElementById('q-dots');
-  const cards = track.querySelectorAll('.testi-card');
-  let cur = 0;
-  function vis(){ return window.innerWidth < 768 ? 1 : window.innerWidth < 1024 ? 2 : 3; }
-  function max(){ return Math.max(0, cards.length - vis()); }
-  function buildDots(){
-    dots.innerHTML='';
-    for(let i=0;i<=max();i++){
-      const d=document.createElement('div');
-      d.className='testi-dot'+(i===cur?' on':'');
-      d.onclick=()=>go(i);
-      dots.appendChild(d);
-    }
-  }
-  function go(i){
-    cur=Math.max(0,Math.min(i,max()));
-    const w=cards[0].offsetWidth+32;
-    track.style.transform=
+
