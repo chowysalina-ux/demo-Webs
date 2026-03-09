@@ -403,9 +403,214 @@
       .wa-float span { display: none; }
       .wa-float { padding: .9rem; }
     }
+    /* ─── BOOKING FLOAT BUTTON ─── */
+    .booking-float {
+      position: fixed; bottom: 2rem; left: 2rem; z-index: 999;
+      display: flex; align-items: center; gap: .7rem;
+      background: var(--forest); color: var(--cream);
+      border: 1px solid rgba(201,168,92,.35);
+      padding: .85rem 1.4rem; border-radius: 50px;
+      cursor: pointer; box-shadow: 0 4px 24px rgba(30,58,47,.35);
+      transition: transform .25s, box-shadow .25s, background .2s;
+      font-family: 'Nunito', sans-serif;
+    }
+    .booking-float:hover { transform: translateY(-3px); box-shadow: 0 8px 32px rgba(30,58,47,.45); background: #2a5040; }
+    .booking-float svg { flex-shrink: 0; color: var(--gold); }
+    .booking-float span { font-size: .8rem; font-weight: 600; letter-spacing: .06em; white-space: nowrap; }
+
+    /* ─── MODAL BACKDROP ─── */
+    .modal-backdrop {
+      position: fixed; inset: 0; z-index: 1000;
+      background: rgba(30,58,47,.55);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      opacity: 0; pointer-events: none;
+      transition: opacity .35s ease;
+      display: flex; align-items: center; justify-content: center;
+      padding: 1.5rem;
+    }
+    .modal-backdrop.open { opacity: 1; pointer-events: all; }
+
+    /* ─── MODAL BOX ─── */
+    .modal-box {
+      background: var(--cream);
+      width: 100%; max-width: 780px;
+      max-height: 90vh;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 32px 80px rgba(30,58,47,.35), 0 0 0 1px rgba(201,168,92,.2);
+      transform: translateY(20px) scale(.97);
+      transition: transform .38s cubic-bezier(.34,1.4,.64,1), opacity .35s ease;
+      opacity: 0;
+      display: flex; flex-direction: column;
+    }
+    .modal-backdrop.open .modal-box { transform: translateY(0) scale(1); opacity: 1; }
+
+    /* ─── MODAL HEADER ─── */
+    .modal-header {
+      background: var(--forest);
+      padding: 1.4rem 2rem;
+      display: flex; align-items: center; justify-content: space-between;
+      flex-shrink: 0;
+    }
+    .modal-header-left { display: flex; align-items: center; gap: 1rem; }
+    .modal-header-ornament { color: var(--gold); font-size: 1rem; letter-spacing: .3em; opacity: .6; }
+    .modal-title {
+      font-family: 'Fraunces', serif; font-size: 1.25rem; font-weight: 400;
+      color: var(--cream); line-height: 1;
+    }
+    .modal-title em { font-style: italic; color: var(--gold); }
+    .modal-subtitle { font-size: .72rem; color: rgba(246,241,231,.45); letter-spacing: .12em; text-transform: uppercase; margin-top: .25rem; }
+    .modal-close {
+      width: 36px; height: 36px; border-radius: 50%;
+      background: rgba(246,241,231,.1); border: 1px solid rgba(246,241,231,.15);
+      color: rgba(246,241,231,.7); cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem; line-height: 1;
+      transition: background .2s, color .2s;
+      font-family: sans-serif;
+    }
+    .modal-close:hover { background: rgba(246,241,231,.2); color: var(--cream); }
+
+    /* ─── MODAL DIVIDER ─── */
+    .modal-divider {
+      height: 3px;
+      background: linear-gradient(to right, var(--gold), rgba(201,168,92,.2), transparent);
+      flex-shrink: 0;
+    }
+
+    /* ─── MODAL BODY ─── */
+    .modal-body {
+      flex: 1; overflow: hidden; position: relative;
+      min-height: 520px;
+    }
+    .modal-body iframe {
+      width: 100%; height: 100%;
+      min-height: 520px;
+      border: none; display: block;
+    }
+    .modal-loading {
+      position: absolute; inset: 0;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      gap: 1rem; background: var(--cream);
+      transition: opacity .4s;
+    }
+    .modal-loading.hidden { opacity: 0; pointer-events: none; }
+    .loader-leaf {
+      font-size: 2.2rem; animation: leafspin 1.8s ease-in-out infinite;
+    }
+    @keyframes leafspin { 0%,100%{transform:rotate(-10deg) scale(1)}50%{transform:rotate(10deg) scale(1.1)} }
+    .modal-loading p { font-family: 'Fraunces',serif; font-size: .95rem; font-style: italic; color: rgba(44,32,18,.45); }
+
+    /* ─── MODAL FOOTER ─── */
+    .modal-footer {
+      padding: .9rem 2rem;
+      background: var(--warm);
+      border-top: 1px solid rgba(201,168,92,.2);
+      display: flex; align-items: center; justify-content: space-between;
+      flex-shrink: 0; flex-wrap: wrap; gap: .5rem;
+    }
+    .modal-footer-txt { font-size: .72rem; color: rgba(44,32,18,.4); letter-spacing: .06em; }
+    .modal-footer-txt strong { color: var(--forest); font-weight: 600; }
+    .modal-footer-wa {
+      display: inline-flex; align-items: center; gap: .45rem;
+      background: transparent; color: #25D366; text-decoration: none;
+      border: 1px solid rgba(37,211,102,.3);
+      font-size: .72rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase;
+      padding: .45rem .9rem; border-radius: 50px;
+      transition: background .2s;
+    }
+    .modal-footer-wa:hover { background: rgba(37,211,102,.07); }
+
+    /* ─── BTN RESERVAR (trigger) ─── */
+    .btn-reservar {
+      display: inline-flex; align-items: center; gap: .6rem;
+      background: transparent; color: var(--cream);
+      border: 1px solid rgba(201,168,92,.5);
+      font-family: 'Nunito', sans-serif;
+      font-size: .75rem; font-weight: 600; letter-spacing: .15em; text-transform: uppercase;
+      padding: .65rem 1.4rem; cursor: pointer;
+      transition: background .2s, border-color .2s;
+    }
+    .btn-reservar:hover { background: rgba(201,168,92,.12); border-color: var(--gold); }
+    .btn-reservar svg { color: var(--gold); flex-shrink: 0; }
+
+    /* inline trigger variant (dark on light bg) */
+    .btn-reservar-dark {
+      display: inline-flex; align-items: center; gap: .6rem;
+      background: var(--forest); color: var(--cream);
+      border: 1px solid transparent;
+      font-family: 'Nunito', sans-serif;
+      font-size: .82rem; font-weight: 600; letter-spacing: .12em; text-transform: uppercase;
+      padding: 1.1rem 2.2rem; cursor: pointer;
+      transition: background .2s, transform .2s;
+    }
+    .btn-reservar-dark:hover { background: #2a5040; transform: translateY(-2px); }
+    .btn-reservar-dark svg { color: var(--gold); flex-shrink: 0; }
+
+    @media (max-width: 600px) {
+      .modal-box { max-height: 95vh; }
+      .modal-header { padding: 1.1rem 1.2rem; }
+      .modal-footer { padding: .8rem 1.2rem; }
+      .booking-float span { display: none; }
+      .booking-float { padding: .9rem; }
+    }
   </style>
 </head>
 <body>
+
+<!-- ══════════════════════════════════════════
+     MODAL DE RESERVAS — TidyCal
+══════════════════════════════════════════ -->
+<div class="modal-backdrop" id="modal" role="dialog" aria-modal="true" aria-label="Reservar visita">
+  <div class="modal-box">
+
+    <div class="modal-header">
+      <div class="modal-header-left">
+        <span class="modal-header-ornament">✦</span>
+        <div>
+          <div class="modal-title">Reservá tu <em>visita</em></div>
+          <div class="modal-subtitle">Elegí el día y horario que más te convenga</div>
+        </div>
+      </div>
+      <button class="modal-close" id="modal-close" aria-label="Cerrar">✕</button>
+    </div>
+
+    <div class="modal-divider"></div>
+
+    <div class="modal-body">
+      <div class="modal-loading" id="modal-loading">
+        <div class="loader-leaf">🌿</div>
+        <p>Cargando el calendario…</p>
+      </div>
+      <iframe
+        id="tidy-iframe"
+        src=""
+        data-src="https://tidycal.com/renzosalina/60-minute-meeting"
+        title="Reservar visita a la quinta"
+        loading="lazy"
+        onload="document.getElementById('modal-loading').classList.add('hidden')">
+      </iframe>
+    </div>
+
+    <div class="modal-footer">
+      <span class="modal-footer-txt">¿Preferís hablar primero? <strong>Te respondemos al toque.</strong></span>
+      <a class="modal-footer-wa" href="https://wa.me/5491100000000" target="_blank">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
+        Escribir por WhatsApp
+      </a>
+    </div>
+
+  </div>
+</div>
+
+<!-- BOTÓN FLOTANTE AGENDA -->
+<button class="booking-float" id="booking-trigger" aria-label="Reservar visita">
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>
+  </svg>
+  <span>Reservar visita</span>
+</button>
 
 <!-- BOTÓN WA FLOTANTE ↓ CAMBIAR NÚMERO -->
 <a class="wa-float" href="https://wa.me/5491100000000?text=Hola!%20Quiero%20consultar%20sobre%20la%20quinta" target="_blank">
@@ -422,11 +627,10 @@
     <a class="nav-link" href="#galeria">Galería</a>
     <a class="nav-link" href="#ubicacion">Ubicación</a>
   </div>
-  <!-- ↓ CAMBIAR NÚMERO -->
-  <a class="nav-btn" href="https://wa.me/5491100000000?text=Quiero%20consultar%20disponibilidad" target="_blank">
-    <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
+  <button class="btn-reservar" id="nav-trigger">
+    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
     Reservar fecha
-  </a>
+  </button>
 </nav>
 
 <!-- ══════════════════════════════════════════
@@ -449,10 +653,10 @@
 
   <div class="hero-btns">
     <!-- ↓ CAMBIAR NÚMERO -->
-    <a class="btn-gold" href="https://wa.me/5491100000000?text=Quiero%20reservar%20una%20fecha%20en%20la%20quinta" target="_blank">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
+    <button class="btn-gold open-modal" style="border:none;cursor:pointer;">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
       Reservar fecha
-    </a>
+    </button>
     <a class="btn-outline-cream" href="#galeria">Ver el espacio ↓</a>
   </div>
 
@@ -510,9 +714,9 @@
       <div class="feat-row"><div class="feat-dot"></div><span>Coordinador de eventos sin cargo</span></div>
     </div>
     <!-- ↓ CAMBIAR NÚMERO -->
-    <a class="btn-gold" href="https://wa.me/5491100000000?text=Quiero%20hacer%20una%20visita" target="_blank" style="margin-top:2.5rem;display:inline-flex;align-items:center;gap:.6rem;">
-      Coordinar visita → 
-    </a>
+    <button class="btn-gold open-modal" style="margin-top:2.5rem;border:none;cursor:pointer;">
+      Coordinar visita →
+    </button>
   </div>
 </section>
 
@@ -735,10 +939,10 @@
     <h2>¿Tenés una fecha<br>en <em>mente</em>?</h2>
     <p>Las fechas se reservan con meses de anticipación. Consultanos hoy y asegurá la tuya sin compromiso.</p>
     <div class="cta-grande-btns">
-      <a class="btn-gold-big" href="https://wa.me/5491100000000?text=Quiero%20reservar%20una%20fecha%20en%20la%20quinta" target="_blank">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
+      <button class="btn-gold-big open-modal" style="border:none;cursor:pointer;">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
         Reservar por WhatsApp
-      </a>
+      </button>
       <a class="btn-cream-outline" href="tel:+5491100000000">Llamar ahora →</a>
     </div>
   </div>
@@ -787,7 +991,46 @@
 
 <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 (function(){
-  const track = document.getElementById('q-track');
+  const modal    = document.getElementById('modal');
+  const iframe   = document.getElementById('tidy-iframe');
+  const loading  = document.getElementById('modal-loading');
+  let loaded = false;
+
+  function openModal(){
+    // load iframe lazily on first open
+    if(!loaded){
+      iframe.src = iframe.dataset.src;
+      loaded = true;
+    } else {
+      loading.classList.add('hidden');
+    }
+    modal.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal(){
+    modal.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  // all triggers
+  document.querySelectorAll('.open-modal, #booking-trigger, #nav-trigger').forEach(el => {
+    el.addEventListener('click', openModal);
+  });
+
+  document.getElementById('modal-close').addEventListener('click', closeModal);
+
+  // click outside closes
+  modal.addEventListener('click', e => {
+    if(e.target === modal) closeModal();
+  });
+
+  // ESC closes
+  document.addEventListener('keydown', e => {
+    if(e.key === 'Escape') closeModal();
+  });
+})();
+</script>
   const dots  = document.getElementById('q-dots');
   const cards = track.querySelectorAll('.testi-card');
   let cur = 0;
